@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyber IT Portal</title>
+    <title>Cyber Login</title>
     <style>
-        /* === Cyberpunk CSS === */
+        /* === Cyberpunk Theme === */
         :root {
             --neon-pink: #ff00ff;
             --neon-blue: #00ffff;
@@ -18,7 +18,11 @@
             background: var(--cyber-black);
             color: var(--neon-blue);
             font-family: 'Courier New', monospace;
-            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
         }
 
         /* === Matrix Rain Background === */
@@ -29,50 +33,84 @@
             z-index: -1;
         }
 
-        /* === Cyber Header === */
-        .cyber-header {
+        /* === Login Container === */
+        .login-container {
+            background: rgba(0, 0, 0, 0.8);
+            border: 3px solid var(--neon-pink);
             padding: 2rem;
+            width: 100%;
+            max-width: 400px;
             text-align: center;
             position: relative;
-            border-bottom: 3px solid var(--neon-pink);
             box-shadow: 0 0 30px var(--neon-pink);
         }
 
-        .cyber-title {
-            font-size: 3rem;
-            text-shadow: 0 0 10px var(--neon-blue);
-            animation: glitch 2s infinite;
-        }
-
-        /* === Holographic Cards === */
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 2rem;
-        }
-
-        .hologram-card {
-            background: rgba(0, 0, 0, 0.8);
-            border: 2px solid var(--neon-pink);
-            padding: 1.5rem;
-            position: relative;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-
-        .hologram-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 0 30px var(--neon-pink);
-        }
-
-        /* === Animated Border === */
-        .hologram-card::before {
+        .login-container::before {
             content: '';
             position: absolute;
             inset: 0;
             border: 2px solid var(--neon-blue);
             animation: borderScan 3s linear infinite;
+        }
+
+        .login-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 10px var(--neon-blue);
+            animation: glitch 2s infinite;
+        }
+
+        /* === Input Fields === */
+        .input-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            background: transparent;
+            border: 1px solid var(--neon-pink);
+            color: var(--neon-blue);
+            font-family: 'Courier New', monospace;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            box-shadow: 0 0 10px var(--neon-pink);
+        }
+
+        .input-group label {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: var(--neon-blue);
+            pointer-events: none;
+            transition: 0.3s;
+        }
+
+        .input-group input:focus + label,
+        .input-group input:not(:placeholder-shown) + label {
+            top: -10px;
+            left: 5px;
+            font-size: 0.8rem;
+            color: var(--neon-pink);
+        }
+
+        /* === Login Button === */
+        .login-btn {
+            background: var(--neon-pink);
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+        }
+
+        .login-btn:hover {
+            background: var(--neon-blue);
         }
 
         /* === Animations === */
@@ -91,28 +129,23 @@
     </style>
 </head>
 <body>
-    <!-- Matrix Rain -->
+    <!-- Matrix Rain Background -->
     <canvas id="matrix-canvas"></canvas>
 
-    <!-- Cyber Header -->
-    <header class="cyber-header">
-        <h1 class="cyber-title">Department of Information technology</h1>
-    </header>
-
-    <!-- Holographic Grid -->
-    <div class="card-grid">
-        <div class="hologram-card">
-            <h2>📷🎥 Gallary</h2>
-            <p>Glorious moments caught on camera</p>
-        </div>
-        <div class="hologram-card">
-            <h2>💪Our Team</h2>
-            <p><main>People that made it possible</main></p>
-        </div>
-        <div class="hologram-card">
-            <h2>🛸Our Projects</h2>
-            <p>Things we are doing</p>
-        </div>
+    <!-- Login Container -->
+    <div class="login-container">
+        <h1 class="login-title">// CYBER_LOGIN</h1>
+        <form id="login-form">
+            <div class="input-group">
+                <input type="text" id="username" placeholder=" " required>
+                <label for="username">👤 Username</label>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" placeholder=" " required>
+                <label for="password">🔒 Password</label>
+            </div>
+            <button type="submit" class="login-btn">ACCESS SYSTEM</button>
+        </form>
     </div>
 
     <script>
@@ -139,21 +172,19 @@
         }
         setInterval(drawMatrix, 50);
 
-        // === Hologram Card Interactions ===
-        document.querySelectorAll('.hologram-card').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                card.style.setProperty('--x', `${x}px`);
-                card.style.setProperty('--y', `${y}px`);
-            });
-        });
+        // === Login Form Handling ===
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
 
-        // === Cyber Sound Effects ===
-        document.addEventListener('click', () => {
-            const synth = new Tone.Synth().toDestination();
-            synth.triggerAttackRelease("C6", "8n");
+            // Basic validation
+            if (username === 'admin' && password === 'cyber123') {
+                alert('✅ Access Granted! Redirecting...');
+                window.location.href = 'main_page.html'; // Replace with your main page
+            } else {
+                alert('❌ Access Denied! Invalid credentials.');
+            }
         });
     </script>
 </body>

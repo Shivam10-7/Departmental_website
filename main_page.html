@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber IT Portal</title>
+    <style>
+        /* === Cyberpunk CSS === */
+        :root {
+            --neon-pink: #ff00ff;
+            --neon-blue: #00ffff;
+            --matrix-green: #0f0;
+            --cyber-black: #000112;
+        }
+
+        body {
+            margin: 0;
+            background: var(--cyber-black);
+            color: var(--neon-blue);
+            font-family: 'Courier New', monospace;
+            overflow-x: hidden;
+        }
+
+        /* === Matrix Rain Background === */
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        /* === Cyber Header === */
+        .cyber-header {
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            border-bottom: 3px solid var(--neon-pink);
+            box-shadow: 0 0 30px var(--neon-pink);
+        }
+
+        .cyber-title {
+            font-size: 3rem;
+            text-shadow: 0 0 10px var(--neon-blue);
+            animation: glitch 2s infinite;
+        }
+
+        /* === Holographic Cards === */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .hologram-card {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid var(--neon-pink);
+            padding: 1.5rem;
+            position: relative;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .hologram-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px var(--neon-pink);
+        }
+
+        /* === Animated Border === */
+        .hologram-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 2px solid var(--neon-blue);
+            animation: borderScan 3s linear infinite;
+        }
+
+        /* === Animations === */
+        @keyframes glitch {
+            0% { text-shadow: 3px 0 0 var(--neon-pink), -3px 0 0 var(--neon-blue); }
+            100% { text-shadow: -3px 0 0 var(--neon-pink), 3px 0 0 var(--neon-blue); }
+        }
+
+        @keyframes borderScan {
+            0% { clip-path: polygon(0 0, 100% 0, 100% 3px, 0 3px); }
+            25% { clip-path: polygon(0 0, 3px 0, 3px 100%, 0 100%); }
+            50% { clip-path: polygon(97% 0, 100% 0, 100% 100%, 97% 100%); }
+            75% { clip-path: polygon(0 97%, 100% 97%, 100% 100%, 0 100%); }
+            100% { clip-path: polygon(0 0, 100% 0, 100% 3px, 0 3px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Matrix Rain -->
+    <canvas id="matrix-canvas"></canvas>
+
+    <!-- Cyber Header -->
+    <header class="cyber-header">
+        <h1 class="cyber-title">Department of Information technology</h1>
+    </header>
+
+    <!-- Holographic Grid -->
+    <div class="card-grid">
+        <div class="hologram-card">
+            <h2>📷🎥 Gallary</h2>
+            <p>Glorious moments caught on camera</p>
+        </div>
+        <div class="hologram-card">
+            <h2>💪Our Team</h2>
+            <p><main>People that made it possible</main></p>
+        </div>
+        <div class="hologram-card">
+            <h2>🛸Our Projects</h2>
+            <p>Things we are doing</p>
+        </div>
+    </div>
+
+    <script>
+        // === Matrix Rain Effect ===
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
+        const drops = Array(Math.floor(canvas.width/10)).fill(0);
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 16, 16, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#0f0';
+            ctx.font = '15px monospace';
+            
+            drops.forEach((drop, i) => {
+                const char = chars[Math.floor(Math.random()*chars.length)];
+                ctx.fillText(char, i*10, drop*10);
+                if(drop*10 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            });
+        }
+        setInterval(drawMatrix, 50);
+
+        // === Hologram Card Interactions ===
+        document.querySelectorAll('.hologram-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--x', `${x}px`);
+                card.style.setProperty('--y', `${y}px`);
+            });
+        });
+
+        // === Cyber Sound Effects ===
+        document.addEventListener('click', () => {
+            const synth = new Tone.Synth().toDestination();
+            synth.triggerAttackRelease("C6", "8n");
+        });
+    </script>
+</body>
+</html>
