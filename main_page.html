@@ -101,7 +101,7 @@
 
     <!-- Holographic Grid -->
     <div class="card-grid">
-        <div class="hologram-card">
+        <div class="hologram-card" onclick="openGallery()">
             <h2>📷🎥 Gallary</h2>
             <p>Glorious moments caught on camera</p>
         </div>
@@ -114,6 +114,7 @@
             <p>Things we are doing</p>
         </div>
     </div>
+
 
     <script>
         // === Matrix Rain Effect ===
@@ -155,6 +156,11 @@
             const synth = new Tone.Synth().toDestination();
             synth.triggerAttackRelease("C6", "8n");
         });
+
+        // Adding functionality to gallery button
+        function openGallery() {
+        window.open("https://drive.google.com/drive/folders/19-niNpoudibV-Iyoz2w2S-xSbLdgOLMu?usp=sharing", "_blank");
+    }
     </script>
 </body>
 </html>
