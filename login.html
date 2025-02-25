@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Bright Innovation Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .login-container {
+            display: flex;
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(244, 63, 94, 0.05) 100%);
+        }
+        
+        .login-visual {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary-light), var(--accent-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .login-visual-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            text-align: center;
+            padding: 0 60px;
+        }
+        
+        .login-visual-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .login-visual-content p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .login-visual-circles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.4;
+        }
+        
+        .login-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .login-circle:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: -50px;
+            left: -100px;
+        }
+        
+        .login-circle:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            bottom: 50px;
+            right: -50px;
+        }
+        
+        .login-circle:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            bottom: 150px;
+            left: 100px;
+        }
+        
+        .login-form-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+        
+        .login-form-wrapper {
+            width: 100%;
+            max-width: 450px;
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .login-header h1 {
+            font-size: 2rem;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+        
+        .login-header p {
+            color: var(--text-medium);
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-medium);
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--background-alt);
+            transition: all 0.3s ease;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+        
+        .input-icon {
+            position: absolute;
+            right: 15px;
+            top: 42px;
+            color: var(--text-light);
+        }
+        
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 25px;
+        }
+        
+        .forgot-password a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .forgot-password a:hover {
+            color: var(--primary-dark);
+        }
+        
+        .login-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .login-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(79, 70, 229, 0.2);
+        }
+        
+        .login-button:active {
+            transform: translateY(0);
+        }
+        
+        .login-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.6s ease;
+        }
+        
+        .login-button:hover::before {
+            left: 100%;
+        }
+        
+        .login-divider {
+            display: flex;
+            align-items: center;
+            margin: 30px 0;
+            color: var(--text-light);
+        }
+        
+        .login-divider::before,
+        .login-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+        
+        .login-divider span {
+            padding: 0 15px;
+        }
+        
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .social-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: white;
+            font-size: 1.2rem;
+            color: var(--text-medium);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .social-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .social-button.google {
+            color: #DB4437;
+        }
+        
+        .social-button.facebook {
+            color: #4267B2;
+        }
+        
+        .social-button.apple {
+            color: #000000;
+        }
+        
+        .register-prompt {
+            text-align: center;
+            color: var(--text-medium);
+            margin-top: 30px;
+        }
+        
+        .register-prompt a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .register-prompt a:hover {
+            color: var(--primary-dark);
+        }
+        
+        .back-to-home {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            color: var(--text-dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .back-to-home:hover {
+            color: var(--primary);
+        }
+        
+        @media (max-width: 992px) {
+            .login-visual {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .login-form-wrapper {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <a href="index.html" class="back-to-home">
+            <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+        
+        <div class="login-visual">
+            <div class="login-visual-circles">
+                <div class="login-circle"></div>
+                <div class="login-circle"></div>
+                <div class="login-circle"></div>
+            </div>
+            <div class="login-visual-content">
+                <h2>Welcome to Bright Tech</h2>
+                <p>Log in to access your account and explore our innovative solutions for a brighter future.</p>
+                <img src="https://source.unsplash.com/random/600x400/?technology,light" alt="Technology" style="max-width: 80%; border-radius: 20px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);">
+            </div>
+        </div>
+        
+        <div class="login-form-container">
+            <div class="login-form-wrapper">
+                <div class="login-header">
+                    <h1>Welcome Back</h1>
+                    <p>Please enter your credentials to log in</p>
+                </div>
+                
+                <form id="loginForm">
+                    <div class="input-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="Enter your email" required>
+                        <i class="fas fa-envelope input-icon"></i>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="Enter your password" required>
+                        <i class="fas fa-lock input-icon"></i>
+                    </div>
+                    
+                    <div class="forgot-password">
+                        <a href="#">Forgot password?</a>
+                    </div>
+                    
+                    <button type="submit" class="login-button">Login to Account</button>
+                </form>
+                
+                <div class="login-divider">
+                    <span>Or continue with</span>
+                </div>
+                
+                <div class="social-login">
+                    <button class="social-button google">
+                        <i class="fab fa-google"></i>
+                    </button>
+                    <button class="social-button facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </button>
+                    <button class="social-button apple">
+                        <i class="fab fa-apple"></i>
+                    </button>
+                </div>
+                
+                <div class="register-prompt">
+                    Don't have an account? <a href="#">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Login form validation
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            if (email && password) {
+                // Show loading state
+                const button = document.querySelector('.login-button');
+                const originalText = button.textContent;
+                button.textContent = 'Logging in...';
+                
+                // Simulate API call
+                setTimeout(() => {
+                    // Redirect to dashboard or homepage
+                    window.location.href = 'index.html';
+                }, 1500);
+            }
+        });
+        
+        // Password visibility toggle
+        document.querySelector('.input-icon').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const icon = this;
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-lock');
+                icon.classList.add('fa-eye');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-lock');
+            }
+        });
+    </script>
+</body>
+</html> 

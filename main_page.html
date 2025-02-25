@@ -3,164 +3,404 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyber IT Portal</title>
-    <style>
-        /* === Cyberpunk CSS === */
-        :root {
-            --neon-pink: #ff00ff;
-            --neon-blue: #00ffff;
-            --matrix-green: #0f0;
-            --cyber-black: #000112;
-        }
-
-        body {
-            margin: 0;
-            background: var(--cyber-black);
-            color: var(--neon-blue);
-            font-family: 'Courier New', monospace;
-            overflow-x: hidden;
-        }
-
-        /* === Matrix Rain Background === */
-        #matrix-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: -1;
-        }
-
-        /* === Cyber Header === */
-        .cyber-header {
-            padding: 2rem;
-            text-align: center;
-            position: relative;
-            border-bottom: 3px solid var(--neon-pink);
-            box-shadow: 0 0 30px var(--neon-pink);
-        }
-
-        .cyber-title {
-            font-size: 3rem;
-            text-shadow: 0 0 10px var(--neon-blue);
-            animation: glitch 2s infinite;
-        }
-
-        /* === Holographic Cards === */
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 2rem;
-        }
-
-        .hologram-card {
-            background: rgba(0, 0, 0, 0.8);
-            border: 2px solid var(--neon-pink);
-            padding: 1.5rem;
-            position: relative;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-
-        .hologram-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 0 30px var(--neon-pink);
-        }
-
-        /* === Animated Border === */
-        .hologram-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border: 2px solid var(--neon-blue);
-            animation: borderScan 3s linear infinite;
-        }
-
-        /* === Animations === */
-        @keyframes glitch {
-            0% { text-shadow: 3px 0 0 var(--neon-pink), -3px 0 0 var(--neon-blue); }
-            100% { text-shadow: -3px 0 0 var(--neon-pink), 3px 0 0 var(--neon-blue); }
-        }
-
-        @keyframes borderScan {
-            0% { clip-path: polygon(0 0, 100% 0, 100% 3px, 0 3px); }
-            25% { clip-path: polygon(0 0, 3px 0, 3px 100%, 0 100%); }
-            50% { clip-path: polygon(97% 0, 100% 0, 100% 100%, 97% 100%); }
-            75% { clip-path: polygon(0 97%, 100% 97%, 100% 100%, 0 100%); }
-            100% { clip-path: polygon(0 0, 100% 0, 100% 3px, 0 3px); }
-        }
-    </style>
+    <title>TECH FUSION | Department of Innovation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Matrix Rain -->
-    <canvas id="matrix-canvas"></canvas>
-
-    <!-- Cyber Header -->
-    <header class="cyber-header">
-        <h1 class="cyber-title">Department of Information technology</h1>
-    </header>
-
-    <!-- Holographic Grid -->
-    <div class="card-grid">
-        <div class="hologram-card" onclick="openGallery()">
-            <h2>📷🎥 Gallary</h2>
-            <p>Glorious moments caught on camera</p>
-        </div>
-        <div class="hologram-card">
-            <h2>💪Our Team</h2>
-            <p><main>People that made it possible</main></p>
-        </div>
-        <div class="hologram-card">
-            <h2>🛸Our Projects</h2>
-            <p>Things we are doing</p>
+    <div class="noise-overlay"></div>
+    <div class="grid-overlay"></div>
+    
+    <!-- Glitch Preloader -->
+    <div class="preloader">
+        <div class="glitch" data-text="LOADING">LOADING</div>
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
         </div>
     </div>
 
+    <!-- Floating Elements -->
+    <div class="floating-elements">
+        <div class="floating-cube"></div>
+        <div class="floating-sphere"></div>
+        <div class="floating-pyramid"></div>
+        <div class="floating-ring"></div>
+        <div class="floating-code">&lt;/&gt;</div>
+        <div class="floating-bits">10110101</div>
+    </div>
 
-    <script>
-        // === Matrix Rain Effect ===
-        const canvas = document.getElementById('matrix-canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
-        const drops = Array(Math.floor(canvas.width/10)).fill(0);
+    <!-- Holographic Menu -->
+    <div class="menu-trigger">
+        <div class="hologram-circle">
+            <div class="hologram-ring"></div>
+            <div class="hologram-icon">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </div>
 
-        function drawMatrix() {
-            ctx.fillStyle = 'rgba(0, 16, 16, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#0f0';
-            ctx.font = '15px monospace';
-            
-            drops.forEach((drop, i) => {
-                const char = chars[Math.floor(Math.random()*chars.length)];
-                ctx.fillText(char, i*10, drop*10);
-                if(drop*10 > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
-            });
-        }
-        setInterval(drawMatrix, 50);
+    <nav class="holo-nav">
+        <ul class="nav-links">
+            <li><a href="#home" class="nav-link glitch-hover" data-text="HOME">HOME</a></li>
+            <li><a href="#about" class="nav-link glitch-hover" data-text="ABOUT">ABOUT</a></li>
+            <li><a href="#projects" class="nav-link glitch-hover" data-text="PROJECTS">PROJECTS</a></li>
+            <li><a href="#team" class="nav-link glitch-hover" data-text="TEAM">TEAM</a></li>
+            <li><a href="#contact" class="nav-link glitch-hover" data-text="CONTACT">CONTACT</a></li>
+        </ul>
+        <div class="holo-scanner"></div>
+    </nav>
 
-        // === Hologram Card Interactions ===
-        document.querySelectorAll('.hologram-card').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                card.style.setProperty('--x', `${x}px`);
-                card.style.setProperty('--y', `${y}px`);
-            });
-        });
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="hero-container">
+            <div class="neon-circle"></div>
+            <div class="hero-content">
+                <h1 class="mega-glitch" data-text="TECH FUSION">TECH FUSION</h1>
+                <p class="hero-subtitle">DEPARTMENT OF DIGITAL INNOVATION</p>
+                <div class="hero-description">
+                    <p>PUSHING BOUNDARIES · CREATING FUTURES · DISRUPTING NORMS</p>
+                </div>
+                <div class="hero-actions">
+                    <button class="neon-button primary">ENTER THE GRID</button>
+                    <button class="neon-button secondary">JOIN OUR TEAM</button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="holographic-sphere">
+                    <div class="holo-element"></div>
+                    <div class="holo-element"></div>
+                    <div class="holo-element"></div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <div class="chevrons">
+                <div class="chevron"></div>
+                <div class="chevron"></div>
+                <div class="chevron"></div>
+            </div>
+        </div>
+    </section>
 
-        // === Cyber Sound Effects ===
-        document.addEventListener('click', () => {
-            const synth = new Tone.Synth().toDestination();
-            synth.triggerAttackRelease("C6", "8n");
-        });
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="section-header">
+            <h2 class="section-title glitch-text" data-text="ABOUT US">ABOUT US</h2>
+            <div class="neon-line"></div>
+        </div>
+        <div class="about-container">
+            <div class="about-visual">
+                <div class="data-visualization">
+                    <div class="data-node"></div>
+                    <div class="data-node"></div>
+                    <div class="data-node"></div>
+                    <div class="data-node"></div>
+                    <div class="data-node"></div>
+                    <div class="data-connection"></div>
+                    <div class="data-connection"></div>
+                    <div class="data-connection"></div>
+                    <div class="data-connection"></div>
+                </div>
+            </div>
+            <div class="about-content">
+                <h3 class="neon-text">REDEFINING DIGITAL BOUNDARIES</h3>
+                <p>The Tech Fusion department operates at the bleeding edge of digital innovation, where imagination meets implementation. We're not just coding the future, we're redesigning the very fabric of digital interaction.</p>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" data-count="42">0</div>
+                        <div class="stat-label">QUANTUM PROJECTS</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" data-count="937">0</div>
+                        <div class="stat-label">NEURAL NETWORKS</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" data-count="100">0</div>
+                        <div class="stat-label">INNOVATION INDEX</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" data-count="24">0</div>
+                        <div class="stat-label">REALITY ENGINES</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        // Adding functionality to gallery button
-        function openGallery() {
-        window.open("https://drive.google.com/drive/folders/19-niNpoudibV-Iyoz2w2S-xSbLdgOLMu?usp=sharing", "_blank");
-    }
-    </script>
+    <!-- Projects Section -->
+    <section class="projects-section" id="projects">
+        <div class="section-header">
+            <h2 class="section-title glitch-text" data-text="PROJECTS">PROJECTS</h2>
+            <div class="neon-line"></div>
+        </div>
+        <div class="project-cards">
+            <div class="project-card">
+                <div class="project-hologram">
+                    <div class="hologram-content">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">NEURAL NEXUS</h3>
+                    <p class="project-description">Advanced neural network implementation with consciousness simulation capabilities and emotional response frameworks.</p>
+                    <div class="project-tech">
+                        <span>QUANTUM AI</span>
+                        <span>SYNTHETIC BIOLOGY</span>
+                        <span>CLOUD COMPUTING</span>
+                    </div>
+                    <div class="project-actions">
+                        <button class="neon-button small">EXPLORE</button>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-hologram">
+                    <div class="hologram-content">
+                        <i class="fas fa-vr-cardboard"></i>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">DIMENSION X</h3>
+                    <p class="project-description">Immersive reality platform that transcends traditional VR boundaries to create multi-sensory digital environments.</p>
+                    <div class="project-tech">
+                        <span>NEURAL RENDERING</span>
+                        <span>HAPTIC FEEDBACK</span>
+                        <span>OLFACTORY SIMULATION</span>
+                    </div>
+                    <div class="project-actions">
+                        <button class="neon-button small">EXPLORE</button>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-hologram">
+                    <div class="hologram-content">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">QUANTUM CORE</h3>
+                    <p class="project-description">Revolutionary quantum computing architecture that redefines computational capacity with multi-dimensional processing.</p>
+                    <div class="project-tech">
+                        <span>ENTANGLEMENT ARRAYS</span>
+                        <span>SUPERPOSITION LOGIC</span>
+                        <span>QUANTUM ENCRYPTION</span>
+                    </div>
+                    <div class="project-actions">
+                        <button class="neon-button small">EXPLORE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section" id="team">
+        <div class="section-header">
+            <h2 class="section-title glitch-text" data-text="OUR TEAM">OUR TEAM</h2>
+            <div class="neon-line"></div>
+        </div>
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="member-hologram">
+                    <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Dr. Nova Chen">
+                    <div class="holo-scan-line"></div>
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">DR. NOVA CHEN</h3>
+                    <p class="member-title">QUANTUM DIRECTOR</p>
+                    <p class="member-bio">Pioneering researcher in quantum computing with 15 dimensional patents and reality-bending algorithms.</p>
+                    <div class="member-stats">
+                        <div class="member-stat">
+                            <div class="stat-value">98%</div>
+                            <div class="stat-bar"><div class="stat-fill" style="width:98%"></div></div>
+                            <div class="stat-label">INNOVATION</div>
+                        </div>
+                        <div class="member-stat">
+                            <div class="stat-value">87%</div>
+                            <div class="stat-bar"><div class="stat-fill" style="width:87%"></div></div>
+                            <div class="stat-label">QUANTUM LOGIC</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="member-hologram">
+                    <img src="https://randomuser.me/api/portraits/men/54.jpg" alt="Prof. Xander Volt">
+                    <div class="holo-scan-line"></div>
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">PROF. XANDER VOLT</h3>
+                    <p class="member-title">NEURAL ARCHITECT</p>
+                    <p class="member-bio">Former NSA cryptographer turned consciousness engineer with groundbreaking work in synthetic cognition.</p>
+                    <div class="member-stats">
+                        <div class="member-stat">
+                            <div class="stat-value">92%</div>
+                            <div class="stat-bar"><div class="stat-fill" style="width:92%"></div></div>
+                            <div class="stat-label">NEURAL SYSTEMS</div>
+                        </div>
+                        <div class="member-stat">
+                            <div class="stat-value">95%</div>
+                            <div class="stat-bar"><div class="stat-fill" style="width:95%"></div></div>
+                            <div class="stat-label">CRYPTOGRAPHY</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="member-hologram">
+                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Dr. Iris Quantum">
+                    <div class="holo-scan-line"></div>
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">DR. IRIS QUANTUM</h3>
+                    <p class="member-title">REALITY ENGINEER</p>
+                    <p class="member-bio">PhD in Theoretical Physics with specialization in dimensional manipulation and sensory augmentation.</p>
+                    <div class="member-stats">
+                        <div class="member-stat">
+                            <div class="stat-value">94%</div>
+                            <div class="stat-bar"><div class="stat-fill" style="width:94%"></div></div>
+                            <div class="stat-label">DIMENSIONAL PHYSICS</div>
+                        </div>
+                        <div class="member-stat">
+                            <div class="stat-value">89%</div>
+                            <div class="stat-bar"><div class="stat-fill" style="width:89%"></div></div>
+                            <div class="stat-label">REALITY CODING</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="member-hologram">
+                    <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Dr. Max Cortex">
+                    <div class="holo-scan-line"></div>
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">DR. MAX CORTEX</h3>
+                    <p class="member-title">BIO-DIGITAL FUSION LEAD</p>
+                    <p class="member-bio">Revolutionary researcher bridging human biology with digital infrastructure through neural interfaces.</p>
+                    <div class="member-stats">
+                        <div class="member-stat">
+                            <div class="stat-value">91%</div>
+                            <div class="stat-bar"><div class="stat-fill" style="width:91%"></div></div>
+                            <div class="stat-label">NEURAL INTERFACES</div>
+                        </div>
+                        <div class="member-stat">
+                            <div class="stat-value">88%</div>
+                            <div class="stat-bar"><div class="stat-fill" style="width:88%"></div></div>
+                            <div class="stat-label">BIOLOGICAL COMPUTING</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="section-header">
+            <h2 class="section-title glitch-text" data-text="CONTACT">CONTACT</h2>
+            <div class="neon-line"></div>
+        </div>
+        <div class="contact-container">
+            <div class="contact-visual">
+                <div class="digital-globe">
+                    <div class="globe-grid"></div>
+                    <div class="globe-points"></div>
+                </div>
+            </div>
+            <div class="contact-form-container">
+                <form class="holographic-form">
+                    <div class="form-field">
+                        <input type="text" id="name" required>
+                        <label for="name">YOUR DESIGNATION</label>
+                        <div class="field-focus-indicator"></div>
+                    </div>
+                    <div class="form-field">
+                        <input type="email" id="email" required>
+                        <label for="email">TRANSMISSION ADDRESS</label>
+                        <div class="field-focus-indicator"></div>
+                    </div>
+                    <div class="form-field">
+                        <select id="subject">
+                            <option value="" disabled selected>SELECT TRANSMISSION TYPE</option>
+                            <option value="collaboration">COLLABORATION PROPOSAL</option>
+                            <option value="recruitment">RECRUITMENT INQUIRY</option>
+                            <option value="project">PROJECT DISCUSSION</option>
+                            <option value="other">OTHER TRANSMISSION</option>
+                        </select>
+                        <div class="field-focus-indicator"></div>
+                    </div>
+                    <div class="form-field">
+                        <textarea id="message" required></textarea>
+                        <label for="message">TRANSMISSION CONTENT</label>
+                        <div class="field-focus-indicator"></div>
+                    </div>
+                    <button type="submit" class="neon-button primary">INITIATE TRANSMISSION</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="tech-footer">
+        <div class="footer-grid">
+            <div class="footer-logo">
+                <div class="logo-hologram">
+                    <span>TECH</span>
+                    <span class="neon-text">FUSION</span>
+                </div>
+                <p>REDEFINING REALITY · BYTE BY BYTE</p>
+            </div>
+            <div class="footer-links">
+                <h3>NAVIGATION NODES</h3>
+                <ul>
+                    <li><a href="#home" class="glitch-hover" data-text="HOME">HOME</a></li>
+                    <li><a href="#about" class="glitch-hover" data-text="ABOUT">ABOUT</a></li>
+                    <li><a href="#projects" class="glitch-hover" data-text="PROJECTS">PROJECTS</a></li>
+                    <li><a href="#team" class="glitch-hover" data-text="TEAM">TEAM</a></li>
+                    <li><a href="#contact" class="glitch-hover" data-text="CONTACT">CONTACT</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>DIGITAL OUTPOSTS</h3>
+                <ul>
+                    <li><a href="#" class="glitch-hover" data-text="QUANTUM LAB">QUANTUM LAB</a></li>
+                    <li><a href="#" class="glitch-hover" data-text="NEURAL HUB">NEURAL HUB</a></li>
+                    <li><a href="#" class="glitch-hover" data-text="STUDENT PORTAL">STUDENT PORTAL</a></li>
+                    <li><a href="#" class="glitch-hover" data-text="RESEARCH NEXUS">RESEARCH NEXUS</a></li>
+                    <li><a href="#" class="glitch-hover" data-text="DIGITAL ARCHIVE">DIGITAL ARCHIVE</a></li>
+                </ul>
+            </div>
+            <div class="footer-newsletter">
+                <h3>JOIN THE NEURAL NETWORK</h3>
+                <p>Subscribe to our quantum-encrypted newsletter for updates directly to your neural interface</p>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="YOUR DIGITAL ADDRESS">
+                    <button class="neon-button small">CONNECT</button>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="social-links">
+                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+            </div>
+            <p class="copyright">© 2023 TECH FUSION DEPARTMENT · ALL REALITIES RESERVED</p>
+        </div>
+    </footer>
+
+    <!-- Cursor Effect -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

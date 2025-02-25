@@ -3,193 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyber Login</title>
-    <style>
-        /* === Cyberpunk Theme === */
-        :root {
-            --neon-pink: #ff00ff;
-            --neon-blue: #00ffff;
-            --matrix-green: #0f0;
-            --cyber-black: #000112;
-        }
-
-        body {
-            margin: 0;
-            background: var(--cyber-black);
-            color: var(--neon-blue);
-            font-family: 'Courier New', monospace;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        /* === Matrix Rain Background === */
-        #matrix-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: -1;
-        }
-
-        /* === Login Container === */
-        .login-container {
-            background: rgba(0, 0, 0, 0.8);
-            border: 3px solid var(--neon-pink);
-            padding: 2rem;
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-            position: relative;
-            box-shadow: 0 0 30px var(--neon-pink);
-        }
-
-        .login-container::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border: 2px solid var(--neon-blue);
-            animation: borderScan 3s linear infinite;
-        }
-
-        .login-title {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            text-shadow: 0 0 10px var(--neon-blue);
-            animation: glitch 2s infinite;
-        }
-
-        /* === Input Fields === */
-        .input-group {
-            margin-bottom: 1.5rem;
-            position: relative;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 10px;
-            background: transparent;
-            border: 1px solid var(--neon-pink);
-            color: var(--neon-blue);
-            font-family: 'Courier New', monospace;
-            outline: none;
-        }
-
-        .input-group input:focus {
-            box-shadow: 0 0 10px var(--neon-pink);
-        }
-
-        .input-group label {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            color: var(--neon-blue);
-            pointer-events: none;
-            transition: 0.3s;
-        }
-
-        .input-group input:focus + label,
-        .input-group input:not(:placeholder-shown) + label {
-            top: -10px;
-            left: 5px;
-            font-size: 0.8rem;
-            color: var(--neon-pink);
-        }
-
-        /* === Login Button === */
-        .login-btn {
-            background: var(--neon-pink);
-            color: #000;
-            border: none;
-            padding: 10px 20px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: 0.3s;
-            width: 100%;
-        }
-
-        .login-btn:hover {
-            background: var(--neon-blue);
-        }
-
-        /* === Animations === */
-        @keyframes glitch {
-            0% { text-shadow: 3px 0 0 var(--neon-pink), -3px 0 0 var(--neon-blue); }
-            100% { text-shadow: -3px 0 0 var(--neon-pink), 3px 0 0 var(--neon-blue); }
-        }
-
-        @keyframes borderScan {
-            0% { clip-path: polygon(0 0, 100% 0, 100% 3px, 0 3px); }
-            25% { clip-path: polygon(0 0, 3px 0, 3px 100%, 0 100%); }
-            50% { clip-path: polygon(97% 0, 100% 0, 100% 100%, 97% 100%); }
-            75% { clip-path: polygon(0 97%, 100% 97%, 100% 100%, 0 100%); }
-            100% { clip-path: polygon(0 0, 100% 0, 100% 3px, 0 3px); }
-        }
-    </style>
+    <title>Bright Innovation Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Matrix Rain Background -->
-    <canvas id="matrix-canvas"></canvas>
-
-    <!-- Login Container -->
-    <div class="login-container">
-        <h1 class="login-title">LOGIN</h1>
-        <form id="login-form">
-            <div class="input-group">
-                <input type="email" id="email" placeholder=" " required>
-<label for="email">📧 Email</label>
-            </div>
-            <div class="input-group">
-                <input type="password" id="password" placeholder=" " required>
-                <label for="password">🔒 Password</label>
-            </div>
-            <button type="submit" class="login-btn">ACCESS SYSTEM</button>
-        </form>
-    </div>
+    <div class="gradient-bg"></div>
+    <div class="pattern-overlay"></div>
     
+   
 
-    <script>
-        // === Matrix Rain Effect ===
-        const canvas = document.getElementById('matrix-canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
-        const drops = Array(Math.floor(canvas.width/10)).fill(0);
+    <!-- Animated Decorative Elements -->
+    <div class="decorative-elements">
+        <div class="floating-circle"></div>
+        <div class="floating-square"></div>
+        <div class="floating-triangle"></div>
+        <div class="floating-plus">+</div>
+        <div class="floating-x">×</div>
+    </div>
 
-        function drawMatrix() {
-            ctx.fillStyle = 'rgba(0, 16, 16, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#0f0';
-            ctx.font = '15px monospace';
+    <!-- Modern Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="logo">
+                <span>Bright</span>Tech
+            </div>
+            <div class="nav-links">
+                <a href="#home" class="nav-link active"><span>Home</span></a>
+                <a href="#about" class="nav-link"><span>About</span></a>
+                <a href="#services" class="nav-link"><span>Services</span></a>
+                <a href="#projects" class="nav-link"><span>Projects</span></a>
+                <a href="#team" class="nav-link"><span>Team</span></a>
+                <a href="#contact" class="nav-link"><span>Contact</span></a>
+                <a href="login.html" class="nav-link"><span>Login</span></a>
+            </div>
+            <div class="nav-actions">
+                <button class="action-button">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="primary-button" onclick="window.location.href='login.html'">
+                    Get Started
+                    <div class="button-shadow"></div>
+                </button>
+            </div>
+            <div class="mobile-menu-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="badge">Innovation Hub</div>
+                <h1 class="hero-title">
+                    Creating Tomorrow's <span class="gradient-text">Solutions</span> Today
+                </h1>
+                <p class="hero-subtitle">
+                    Explore our cutting-edge technologies and innovative approaches to transform ideas into reality
+                </p>
+                <div class="hero-actions">
+                    <button class="primary-button large">
+                        Explore Projects
+                        <div class="button-shadow"></div>
+                    </button>
+                    <button class="outline-button large">
+                        <i class="fas fa-play"></i> Watch Video
+                    </button>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">150<span>+</span></div>
+                        <div class="stat-label">Projects Completed</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-number">50<span>+</span></div>
+                        <div class="stat-label">Team Members</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-number">98<span>%</span></div>
+                        <div class="stat-label">Client Satisfaction</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="geometric-composition">
+                    <div class="geo-circle"></div>
+                    <div class="geo-square"></div>
+                    <div class="geo-triangle"></div>
+                    <div class="geo-dots"></div>
+                    <div class="geo-lines"></div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <div class="scroll-arrows">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">About Us</div>
+                <h2 class="section-title">We Are <span class="gradient-text">Creative</span> Problem Solvers</h2>
+                <p class="section-subtitle">Learn more about our journey, vision, and the technology that drives us forward</p>
+            </div>
             
-            drops.forEach((drop, i) => {
-                const char = chars[Math.floor(Math.random()*chars.length)];
-                ctx.fillText(char, i*10, drop*10);
-                if(drop*10 > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
-            });
-        }
-        setInterval(drawMatrix, 50);
-
-        // === Login Form Handling ===
-        document.getElementById('login-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-
-            // Basic validation
-            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-if (emailPattern.test(email)) {
-
-
-                alert('✅ Access Granted! Redirecting...');
-                window.location.href = 'main_page.html'; // Replace with your main page
-            } else {
-                alert('❌ Access Denied! Invalid credentials.');
-            }
-        });
-    </script>
+            <div class="about-content">
+                <div class="about-visual">
+                    <div class="visual-grid">
+                        <div class="grid-item item-1">
+                            <img src="https://source.unsplash.com/random/600x400/?technology" alt="Technology">
+                        </div>
+                        <div class="grid-item item-2">
+                            <img src="https://source.unsplash.com/random/600x400/?innovation" alt="Innovation">
+                        </div>
+                        <div class="grid-item item-3">
+                            <img src="https://source.unsplash.com/random/600x400/?design" alt="Design">
+                        </div>
+                        <div class="grid-item item-4">
+                            <div class="about-quote">
+                                <i class="fas fa-quote-left"></i>
+                                <p>Innovation is seeing what everybody has seen and thinking what nobody has thought</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="visual-decoration">
+                        <div class="decoration-line"></div>
+                        <div class="decoration-dots"></div>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <h3>Our Story</h3>
+                    <p>Founded in 2010, our company has been at the forefront of technological innovation for over a decade. We began as a small team of passionate technologists with a vision to create solutions that would transform industries.</p>
+                    
+                    <h3>Our Approach</h3>
+                    <p>We believe in a human-centered approach to technology. By combining cutting-edge technical expertise with deep empathy for user needs, we create solutions that are not just technologically advanced but also intuitive and accessible.</p>
+                    
+                    <div class="feature-grid">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <h4>Innovative Thinking</h4>
+                            <p>We push boundaries and challenge conventions to find new solutions</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h4>Collaborative Process</h4>
+                            <p>We work closely with clients to ensure their vision becomes reality</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <h4>Rapid Deployment</h4>
+                            <p>We deliver solutions quickly without compromising on quality</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-cog"></i>
+                            </div>
+                            <h4>Continuous Improvement</h4>
+                            <p>We constantly refine and enhance our solutions based on feedback</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-divider">
+            <div class="divider-dot"></div>
+            <div class="divider-line"></div>
+            <div class="divider-dot"></div>
+        </div>
+    </section>
 </body>
 </html>
